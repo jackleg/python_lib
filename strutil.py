@@ -2,6 +2,8 @@
 
 """string 관련 처리 모듈."""
 
+import re
+
 
 def str_join(data_list, sep="\t"):
     """data_list들을 하나의 문자열로 만든다.
@@ -18,3 +20,18 @@ def str_join(data_list, sep="\t"):
 
     str_list = map(str, data_list)
     return sep.join(str_list)
+
+
+def has_hangul(haystack):
+    """주어진 string 안에 한글이 존재하는지 여부를 판단.
+
+    :param hayatack: 검사할 string.
+    :return: haystack string안에 한글 자모, 혹은 글자가 존재하면 True, 없으면 False
+    """
+
+    hangul = re.compile('[ㄱ-ㅎㅏ-ㅣ가-힣]')
+   
+    if isinstance(haystack, unicode):
+        haystack = haystack.encode('utf8')
+
+    return (hangul.search(haystack) is not None)
