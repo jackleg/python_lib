@@ -22,16 +22,17 @@ def str_join(data_list, sep="\t"):
     return sep.join(str_list)
 
 
-def has_hangul(haystack):
+def has_hangul(haystack, encoding="utf8"):
     """주어진 string 안에 한글이 존재하는지 여부를 판단.
 
     :param hayatack: 검사할 string.
+    :param encoding: haystack이 unicode가 아닌 경우 사용된 encoding.
     :return: haystack string안에 한글 자모, 혹은 글자가 존재하면 True, 없으면 False
     """
 
-    hangul = re.compile('[ㄱ-ㅎㅏ-ㅣ가-힣]')
+    hangul = re.compile(u'[ㄱ-ㅎㅏ-ㅣ가-힣]')
    
-    if isinstance(haystack, unicode):
-        haystack = haystack.encode('utf8')
+    if isinstance(haystack, str):
+        haystack = haystack.decode(encoding)
 
     return (hangul.search(haystack) is not None)
