@@ -1,5 +1,5 @@
 from distutils.core import setup
 
-setup(name = 'jay',
+setup(name = 'putils',
       version = '0.1',
-      packages = ['jay'])
+      packages = ['putils'])
