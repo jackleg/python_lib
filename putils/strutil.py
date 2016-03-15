@@ -71,16 +71,20 @@ def get_json_value(json_obj, element_name):
     name_token = name_tokens[0]
 
     # json_obj가 list형이라면, [{"name1": {}}, {"name2": {}}, ..., ] 인 경우로 가정하고 해당 dictionary를 구한다.
-    if isinstance(json_obj, list):
-        for item in json_obj:
-            if name_token in item:
-                target_obj = item[name_token]
-    elif isinstance(json_obj, dict):
-        target_obj = json_obj[name_token]
+    try:
+        if isinstance(json_obj, list):
+            for item in json_obj:
+                if name_token in item:
+                    target_obj = item[name_token]
+        elif isinstance(json_obj, dict):
+            target_obj = json_obj[name_token]
 
-    if len(name_tokens) == 1:
-        return target_obj
-    else:
-        return get_json_value(target_obj, name_tokens[1])
+        if len(name_tokens) == 1:
+            return target_obj
+        else:
+            return get_json_value(target_obj, name_tokens[1])
+    # 주어진 데이터가 없는 경우.
+    except KeyError:
+        return ""
 
 
