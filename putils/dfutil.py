@@ -25,3 +25,19 @@ def find_by_value(df, column_name, value, first=True):
             return index_list[-1]
     else:
         return None
+
+
+def has_null(ser, need_count=False):
+    """series에서 null value가 있는지 여부 확인.
+
+    :param ser: 확인할 값이 있는 Series.
+    :param need_count: null 값이 몇 개나 있는지 값을 함께 반환할 지 여부.
+    :return: ser에 null value가 있으면 true 없다면 false. need_count가 True라면 (null value 여부, null value 개수)의 pair.
+    """
+
+    rel_list = pd.isnull(ser)
+    if need_count:
+        count = rel_list.sum()
+        return pd.Series([(count > 0), count], index=["has_null", "count"])
+    else:
+        return any(rel_list)
