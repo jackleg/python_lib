@@ -1,12 +1,17 @@
 # -*- coding: utf8 -*-
 
-"""통계 관련 utility"""
+"""통계 관련 utility
+
+.. todo::
+    통계와 ipython의 영역을 분리해야 할 듯.
+"""
 
 
 import pandas as pd
 import numpy as np
 from pandas.tools.plotting import table
-
+from IPython.core.display import display
+import matplotlib.pyplot as plt
 
 def calc_prob(series):
     """series에 있는 값들의 분포를 구한다.
@@ -119,3 +124,125 @@ def plot_good_ratio(target, feature, bins=10, accumulative=False, ascending=True
         ratio_df['ratio'] = ratio_df['ratio'].round(3)
         t = table(ax, ratio_df[['ratio', 'good', 'count']].T)
         t.scale(1.0, 2.0)
+
+
+def feature_summary(df, feature_name, min_hat=float('-inf'), max_hat=float('inf')):
+    """df에서 feature_name의 statistics summary와 histogram을 그린다.
+
+    df[feature_name]의 분포를 구한다. 이 때, min_hat과 max_hat 값이 주어지면,
+    min_hat < df[feature_name] < max_hat 에 대해서만 구한다.
+
+    :param df: feature가 포함된 DataFrame
+    :param feature_name: df에서 확인할 feature name.
+    :param min_hat: minimum threshold. min_hat 이하의 feature들은 filtering된다.
+    :param max_hat: maximum threshold. max_hat 이상의 feature들은 filtering된다.
+
+    .. todo::
+        category별로 feature를 나누는 기능 구현 필요함. (e.g. query category별)
+    """
+
+    # 각각 min_hat, max_hat이 지정되었을 때 해당 feature의 describe
+    min_describe_df = pd.DataFrame()
+    max_describe_df = pd.DataFrame()
+    filtered_describe_df = pd.DataFrame()
+
+    categories = ["all"]
+    colors = ["red"]
+    
+    for category in categories:
+        """category별로 feature describe 출력"""
+        
+        # min_hat 설정에 따른 describe 추가
+        if min_hat > float('-inf'):
+            if category == "all":
+                min_describe_df["all"] = df.loc[df[feature_name] <= min_hat, feature_name].describe()
+            else:
+                min_describe_df[category] = df.loc[(df[feature_name] <= min_hat) & (df["q_category"] == category), feature_name].describe()
+                
+        # max_hat 설정 여부에 따른 describe 추가
+        if max_hat < float('inf'):
+            if category == "all":
+                max_describe_df["all"] = df.loc[df[feature_name] >= max_hat, feature_name].describe()
+            else:
+                max_describe_df[category] = df.loc[(df[feature_name] >= max_hat) & (df["q_category"] == category), feature_name].describe()
+    
+        # min, max로 filtering 한 후의 결과
+        if category == "all":
+            filters = (df[feature_name] > min_hat) & (df[feature_name] < max_hat)
+        else:
+            filters = (df[feature_name] > min_hat) & (df[feature_name] < max_hat) & (df["q_category"] == category)
+  
+        filtered_describe_df[category] = df.loc[filters, feature_name].describe()
+
+    if min_hat > float('-inf'):
+        print "=== %s <= %f ===" % (feature_name, min_hat)
+        display(min_describe_df)
+        
+    if max_hat < float('inf'):
+        print "=== %s >= %f ===" % (feature_name, max_hat)
+        display(max_describe_df)
+        
+    print "=== {min_hat} < {fn} < {max_hat} ===".format(min_hat=min_hat, max_hat=max_hat, fn=feature_name)
+    display(filtered_describe_df)
+    
+    # draw histograms for each category
+    filters = (df[feature_name] > min_hat) & (df[feature_name] < max_hat)
+        
+    ax = df.loc[filters, feature_name].hist(bins=30, normed=True, alpha=0.5, label=category, figsize=(15, 7))
+    ax.set_title(feature_name + " / all")
+    ax.legend(loc='best')
+
+    #categories = "all short midterm longterm".split()
+    #colors = "red red blue green".split()
+    #
+    #for category in categories:
+    #    """category별로 feature describe 출력"""
+    #    
+    #    # min_hat 설정에 따른 describe 추가
+    #    if min_hat > float('-inf'):
+    #        if category == "all":
+    #            min_describe_df["all"] = df.loc[df[feature_name] <= min_hat, feature_name].describe()
+    #        else:
+    #            min_describe_df[category] = df.loc[(df[feature_name] <= min_hat) & (df["q_category"] == category), feature_name].describe()
+    #            
+    #    # max_hat 설정 여부에 따른 describe 추가
+    #    if max_hat < float('inf'):
+    #        if category == "all":
+    #            max_describe_df["all"] = df.loc[df[feature_name] >= max_hat, feature_name].describe()
+    #        else:
+    #            max_describe_df[category] = df.loc[(df[feature_name] >= max_hat) & (df["q_category"] == category), feature_name].describe()
+    #
+    #    # min, max로 filtering 한 후의 결과
+    #    if category == "all":
+    #        filters = (df[feature_name] > min_hat) & (df[feature_name] < max_hat)
+    #    else:
+    #        filters = (df[feature_name] > min_hat) & (df[feature_name] < max_hat) & (df["q_category"] == category)
+  
+    #    filtered_describe_df[category] = df.loc[filters, feature_name].describe()
+
+    #if min_hat > float('-inf'):
+    #    print "=== %s <= %f ===" % (feature_name, min_hat)
+    #    display(min_describe_df)
+    #    
+    #if max_hat < float('inf'):
+    #    print "=== %s >= %f ===" % (feature_name, max_hat)
+    #    display(max_describe_df)
+    #    
+    #print "=== {min_hat} < {fn} < {max_hat} ===".format(min_hat=min_hat, max_hat=max_hat, fn=feature_name)
+    #display(filtered_describe_df)
+    #
+    ## draw histograms for each category
+    #fig, axes = plt.subplots(1, 2, figsize=(20, 7))
+    #for category, color in zip(categories, colors):
+    #    if category == "all":
+    #        filters = (df[feature_name] > min_hat) & (df[feature_name] < max_hat)
+    #        ax = axes[0]
+    #        ax.set_title(feature_name + " / all")
+    #    else:
+    #        filters = (df[feature_name] > min_hat) & (df[feature_name] < max_hat) & (df["q_category"] == category)
+    #        ax = axes[1]
+    #        ax.set_title(feature_name + " / query category")
+    #        
+    #    df.loc[filters, feature_name].hist(bins=30, ax=ax, normed=True, color=color, alpha=0.5, label=category)
+    #    ax.legend(loc='best')
+    #    #ax.set_title(feature_name + " / " + category)
