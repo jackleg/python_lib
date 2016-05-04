@@ -34,6 +34,10 @@ def has_hangul(haystack, encoding="utf8"):
    
     if isinstance(haystack, str):
         haystack = haystack.decode(encoding)
+    elif isinstance(haystack, unicode):
+        pass
+    else: # 문자열이 아닌 값이 들어온 경우
+        raise TypeError("haystack must be str, or unicode. (%s)[%s] received." % (haystack, type(haystack)))
 
     return (hangul.search(haystack) is not None)
 
