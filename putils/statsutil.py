@@ -6,12 +6,88 @@
     통계와 ipython의 영역을 분리해야 할 듯.
 """
 
+from __future__ import division
 
 import pandas as pd
 import numpy as np
 from pandas.tools.plotting import table
 from IPython.core.display import display
 import matplotlib.pyplot as plt
+from scipy import linalg, mat, dot
+
+
+def convert_dict_to_vec(a, b):
+    if type(a) == dict:
+        a_dict = a
+        b_dict = b
+    elif type(a) == list:
+        a_dict = {t:c for t,c in a}
+        b_dict = {t:c for t,c in b}
+
+    terms = set(a_dict.keys())
+    terms = terms.union(set(b_dict.keys()))
+    a = []
+    b = []
+    for term in terms:
+        a.append(a_dict.get(term, 0.0))
+        b.append(b_dict.get(term, 0.0))
+
+    return a, b
+
+
+def cossim(l1, l2):
+    a = mat(l1)
+    b = mat(l2)
+    c = dot(a,b.T)/linalg.norm(a)/linalg.norm(b)
+
+    return c[(0, 0)]
+
+
+def jaccard_sim(kl1, kl2):
+    """keyword list 두개의 jaccard similarity를 구한다."""
+    ks1 = set(kl1)
+    ks2 = set(kl2)
+    ks_union = ks1.union(ks2)
+    ks_int = ks1.intersection(ks2)
+
+    return len(ks_int) / len(ks_union)
+
+
+def jaccard_inc(haystack, needles):
+    """needle이 haystack에 얼마나 포함되어 있는지 확인.
+
+    :param haystack: needle이 포함된 여부를 판단하기 위한 키워드 리스트.
+    :param needles: 포함 여부를 판단하기 위한 키워드 리스트.
+    :return: needle이 haystack에 얼마나 포함되어 있는지 비율. |needles intersect haystack| / |needles|
+    """
+    hs = set(haystack)
+    ns = set(needles)
+    hs_ins = hs.intersection(ns)
+
+    return len(hs_ins) / len(ns)
+
+
+def cosine_sim(il1, il2):
+    """(keyword, score)의 리스트 두 개를 받아서 cosine similarity를 구한다.
+
+    :param il1, il2: (keyword, score)의 리스트
+    :return: il1, il2의 keyword들의 cosine similarity
+    """
+   
+    # 두 list를 Series로 만든 후 concat하면 join한 결과가 된다.
+    # 없는 term의 경우는 0.0으로 만들면 된다.
+    s1 = pd.Series({k: i for k, i in il1})
+    s2 = pd.Series({k: i for k, i in il2})
+    s = pd.concat([s1, s2], axis=1).fillna(0.0)
+
+    array1 = s.iloc[:, 0]
+    array2 = s.iloc[:, 1]
+
+    numerator = dot(array1, array2)
+    denominator = linalg.norm(array1) * linalg.norm(array2) 
+
+    return numerator / denominator
+
 
 def calc_prob(series):
     """series에 있는 값들의 분포를 구한다.
@@ -124,6 +200,25 @@ def plot_good_ratio(target, feature, bins=10, accumulative=False, ascending=True
         ratio_df['ratio'] = ratio_df['ratio'].round(3)
         t = table(ax, ratio_df[['ratio', 'good', 'count']].T)
         t.scale(1.0, 2.0)
+
+
+def plot_merged_hist(ser1, ser2, bin_count=10, **kwargs):
+    """ser1과 ser2의 범위를 모두 고려해 histogram을 그린다.
+    
+    ser1과 ser2의 min / max 분포가 확연히 다를 때, hist를 따로 그리면 bin 개수가 달라져 histogram을 해석하기 어렵다. 이 경우 두 데이터의 범위를 함께 고려해서 bin을 구해 histogram을 구하는 것이 더 직관적이다.
+    :param ser1, ser2: 함께 histogram을 그릴 데이터 series
+    :param bin_count: bin 개수
+    :return: plot ax
+    """
+
+    all_ser = np.hstack([ser1, ser2]) # 두 데이터 계열을 하나로 합한다.
+    freq, bins = np.histogram(all_ser, bins=bin_count) # np.histogram이 반환하는 bins 정보를 이용.
+
+    ax = ser1.hist(color="red", alpha=0.3, bins=bins, **kwargs)
+    ser2.hist(ax=ax, color="blue", alpha=0.3, bins=bins, **kwargs)
+    ax.legend([ser1.name, ser2.name])
+
+    return ax
 
 
 def feature_summary(df, feature_name, min_hat=float('-inf'), max_hat=float('inf')):
@@ -246,3 +341,12 @@ def feature_summary(df, feature_name, min_hat=float('-inf'), max_hat=float('inf'
     #    df.loc[filters, feature_name].hist(bins=30, ax=ax, normed=True, color=color, alpha=0.5, label=category)
     #    ax.legend(loc='best')
     #    #ax.set_title(feature_name + " / " + category)
+
+
+if __name__ == '__main__':
+    print "cossim:", cossim(
+                *convert_dict_to_vec(
+                    [('a',1)],
+                    [('b',1)]
+                )
+            )
