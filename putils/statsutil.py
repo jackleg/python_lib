@@ -202,7 +202,7 @@ def plot_good_ratio(target, feature, bins=10, accumulative=False, ascending=True
         t.scale(1.0, 2.0)
 
 
-def plot_merged_hist(ser1, ser2, bin_count=10, **kwargs):
+def plot_merged_hist(ser1, ser2, bin_count=10, names=None, **kwargs):
     """ser1과 ser2의 범위를 모두 고려해 histogram을 그린다.
     
     ser1과 ser2의 min / max 분포가 확연히 다를 때, hist를 따로 그리면 bin 개수가 달라져 histogram을 해석하기 어렵다. 이 경우 두 데이터의 범위를 함께 고려해서 bin을 구해 histogram을 구하는 것이 더 직관적이다.
@@ -216,7 +216,11 @@ def plot_merged_hist(ser1, ser2, bin_count=10, **kwargs):
 
     ax = ser1.hist(color="red", alpha=0.3, bins=bins, **kwargs)
     ser2.hist(ax=ax, color="blue", alpha=0.3, bins=bins, **kwargs)
-    ax.legend([ser1.name, ser2.name])
+
+    if names:
+        ax.legend(names)
+    else:
+        ax.legend([ser1.name, ser2.name])
 
     return ax
 
