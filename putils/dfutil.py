@@ -73,6 +73,16 @@ def read_tsv(filepath_or_buffer, **kwargs):
     return pd.read_csv(filepath_or_buffer, sep=sep, header=header, quoting=quoting, **kwargs)
 
 
+def read_kenobi(filepath_or_buffer, **kwargs):
+    """kenobi qc 파일 릵기.
+
+    read_tsv 함수를 사용하며, 그 외에는 아래와 같은 기본값 사용.
+    skiprows = 14
+    header = 0
+    """
+    return read_tsv(filepath_or_buffer, skiprows=14, header=0)
+
+
 def read_json(filepath_or_buffer, index_col=None):
     """row 데이터가 json 포맷으로 구성된 데이터 읽기"""
 
