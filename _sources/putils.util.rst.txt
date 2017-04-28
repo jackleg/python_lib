@@ -1,0 +1,7 @@
+putils.util module
+==================
+
+.. automodule:: putils.util
+    :members:
+    :undoc-members:
+    :show-inheritance:

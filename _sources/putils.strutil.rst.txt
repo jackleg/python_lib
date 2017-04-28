@@ -1,0 +1,7 @@
+putils.strutil module
+=====================
+
+.. automodule:: putils.strutil
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,7 @@
+putils.statsutil module
+=======================
+
+.. automodule:: putils.statsutil
+    :members:
+    :undoc-members:
+    :show-inheritance:

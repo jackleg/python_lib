@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>putils.statsutil module &#8212; putils 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-putils.statsutil">
+<span id="putils-statsutil-module"></span><h1>putils.statsutil module<a class="headerlink" href="#module-putils.statsutil" title="Permalink to this headline">¶</a></h1>
+<p>통계 관련 utility</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">통계와 ipython의 영역을 분리해야 할 듯.</p>
+</div>
+<dl class="function">
+<dt id="putils.statsutil.calc_kld">
+<code class="descclassname">putils.statsutil.</code><code class="descname">calc_kld</code><span class="sig-paren">(</span><em>ser1</em>, <em>ser2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#calc_kld"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.calc_kld" title="Permalink to this definition">¶</a></dt>
+<dd><p>두 확률 분포 Series의 KL Divergence를 구한다.</p>
+<p>두 시리즈는 각각 index는 해당 아이템이고, value는 해당 아이템의 확률값을 갖는다.
+KL(ser1||ser2)를 계산한 값을 반환한다.
+이 때, ser1와 ser2의 index가 모두 동일할 필요는 없으나,
+ser1에서 확률이 0인 경우의 KL은 0이되고, ser2에서 0은 small epsilon(1e-12)으로 smoothing된다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">KL(ser1||ser2)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.calc_prob">
+<code class="descclassname">putils.statsutil.</code><code class="descname">calc_prob</code><span class="sig-paren">(</span><em>series</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#calc_prob"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.calc_prob" title="Permalink to this definition">¶</a></dt>
+<dd><p>series에 있는 값들의 분포를 구한다.</p>
+<p>series에 있는 값들이 discrete하다고 가정하고 각 value의 확률을 구한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">index는 series의 value이고, 값이 확률인 pd.Series</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.convert_dict_to_vec">
+<code class="descclassname">putils.statsutil.</code><code class="descname">convert_dict_to_vec</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#convert_dict_to_vec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.convert_dict_to_vec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.cosine_sim">
+<code class="descclassname">putils.statsutil.</code><code class="descname">cosine_sim</code><span class="sig-paren">(</span><em>il1</em>, <em>il2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#cosine_sim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.cosine_sim" title="Permalink to this definition">¶</a></dt>
+<dd><p>(keyword, score)의 리스트 두 개를 받아서 cosine similarity를 구한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>il2</strong> (<em>il1</em><em>,</em><em></em>) &#8211; (keyword, score)의 리스트</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">il1, il2의 keyword들의 cosine similarity</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.cossim">
+<code class="descclassname">putils.statsutil.</code><code class="descname">cossim</code><span class="sig-paren">(</span><em>l1</em>, <em>l2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#cossim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.cossim" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.feature_summary">
+<code class="descclassname">putils.statsutil.</code><code class="descname">feature_summary</code><span class="sig-paren">(</span><em>df</em>, <em>feature_name</em>, <em>min_hat=-inf</em>, <em>max_hat=inf</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#feature_summary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.feature_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>df에서 feature_name의 statistics summary와 histogram을 그린다.</p>
+<p>df[feature_name]의 분포를 구한다. 이 때, min_hat과 max_hat 값이 주어지면,
+min_hat &lt; df[feature_name] &lt; max_hat 에 대해서만 구한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>df</strong> &#8211; feature가 포함된 DataFrame</li>
+<li><strong>feature_name</strong> &#8211; df에서 확인할 feature name.</li>
+<li><strong>min_hat</strong> &#8211; minimum threshold. min_hat 이하의 feature들은 filtering된다.</li>
+<li><strong>max_hat</strong> &#8211; maximum threshold. max_hat 이상의 feature들은 filtering된다.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">category별로 feature를 나누는 기능 구현 필요함. (e.g. query category별)</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.good_ratio">
+<code class="descclassname">putils.statsutil.</code><code class="descname">good_ratio</code><span class="sig-paren">(</span><em>target</em>, <em>feature</em>, <em>bins=10</em>, <em>accumulative=False</em>, <em>ascending=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#good_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.good_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>P(target = 1 | a &lt; feature &lt; b) 인 확률 P를 구한다.</p>
+<p>feature가 특정 구간 안에 있을 때 target이 1인 확률을 구한다.
+구간은 bins의 개수로 조절하며, bins의 개수에 따라 qcut으로 feature의 구간을 구한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>target</strong> &#8211; good / bad 여부를 나타내는 Series.</li>
+<li><strong>feature</strong> &#8211; 분포를 구할 feature Series.</li>
+<li><strong>bins</strong> &#8211; feature의 구간 개수. default: 10</li>
+<li><strong>accumulative</strong> &#8211; 확률을 구할 때 누적 확률을 구할 것인지 여부. False이면 해당 구간에서의 확률만 구하고, True이면 누적 확률을 구한다. default: False</li>
+<li><strong>ascending</strong> &#8211; accumulative == True일 때, 누적 확률을 큰 값에서부터 누적할지, 작은 값부터 누적할지 결정한다. True이면 작은 값부터, False이면 큰 값부터 누적한다.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">(base, prob. by section), accumulative == True라면 accumulative prob.을 추가한 triple이 반환된다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.jaccard_inc">
+<code class="descclassname">putils.statsutil.</code><code class="descname">jaccard_inc</code><span class="sig-paren">(</span><em>haystack</em>, <em>needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#jaccard_inc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.jaccard_inc" title="Permalink to this definition">¶</a></dt>
+<dd><p>needle이 haystack에 얼마나 포함되어 있는지 확인.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>haystack</strong> &#8211; needle이 포함된 여부를 판단하기 위한 키워드 리스트.</li>
+<li><strong>needles</strong> &#8211; 포함 여부를 판단하기 위한 키워드 리스트.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">needle이 haystack에 얼마나 포함되어 있는지 비율. <a href="#id1"><span class="problematic" id="id2">|needles intersect haystack|</span></a> / <a href="#id3"><span class="problematic" id="id4">|needles|</span></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.jaccard_sim">
+<code class="descclassname">putils.statsutil.</code><code class="descname">jaccard_sim</code><span class="sig-paren">(</span><em>kl1</em>, <em>kl2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#jaccard_sim"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.jaccard_sim" title="Permalink to this definition">¶</a></dt>
+<dd><p>keyword list 두개의 jaccard similarity를 구한다.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.plot_good_ratio">
+<code class="descclassname">putils.statsutil.</code><code class="descname">plot_good_ratio</code><span class="sig-paren">(</span><em>target</em>, <em>feature</em>, <em>bins=10</em>, <em>accumulative=False</em>, <em>ascending=True</em>, <em>show_table=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#plot_good_ratio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.plot_good_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>good_ratio로 구한 P(target = 1) 확률을 그래프로 표현한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>target</strong> &#8211; good / bad 여부를 나타내는 Series.</li>
+<li><strong>feature</strong> &#8211; 분포를 구할 feature Series.</li>
+<li><strong>bins</strong> &#8211; feature의 구간 개수. default: 10</li>
+<li><strong>accumulative</strong> &#8211; 확률을 구할 때 누적 확률을 구할 것인지 여부. False이면 해당 구간에서의 확률만 구하고, True이면 누적 확률을 구한다. default: False</li>
+<li><strong>ascending</strong> &#8211; accumulative == True일 때, 누적 확률을 큰 값에서부터 누적할지, 작은 값부터 누적할지 결정한다. True이면 작은 값부터, False이면 큰 값부터 누적한다.</li>
+<li><strong>show_table</strong> &#8211; feature 구간별 data table을 출력할 지 여부.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.statsutil.plot_merged_hist">
+<code class="descclassname">putils.statsutil.</code><code class="descname">plot_merged_hist</code><span class="sig-paren">(</span><em>ser1</em>, <em>ser2</em>, <em>bin_count=10</em>, <em>names=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/statsutil.html#plot_merged_hist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.statsutil.plot_merged_hist" title="Permalink to this definition">¶</a></dt>
+<dd><p>ser1과 ser2의 범위를 모두 고려해 histogram을 그린다.</p>
+<p>ser1과 ser2의 min / max 분포가 확연히 다를 때, hist를 따로 그리면 bin 개수가 달라져 histogram을 해석하기 어렵다. 이 경우 두 데이터의 범위를 함께 고려해서 bin을 구해 histogram을 구하는 것이 더 직관적이다.
+:param ser1, ser2: 함께 histogram을 그릴 데이터 series
+:param bin_count: bin 개수
+:return: plot ax</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/putils.statsutil.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, jay.han.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/putils.statsutil.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

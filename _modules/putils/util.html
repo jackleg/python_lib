@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>putils.util &#8212; putils 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for putils.util</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;utility 모음&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="split_list"><a class="viewcode-back" href="../../putils.util.html#putils.util.split_list">[docs]</a><span class="k">def</span> <span class="nf">split_list</span><span class="p">(</span><span class="n">crowd</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;crowd를 최대한 동일한 사이즈로 count 개수만큼 나누어, 리스트의 리스트를 만든다.</span>
+
+<span class="sd">    :param crowd: 나눌 리스트</span>
+<span class="sd">    :param count: 나눌 개수.</span>
+<span class="sd">    :return: count 개수만큼 나뉜 리스트의 리스트.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">crowd</span><span class="p">[:]]</span>
+
+    <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">crowd</span><span class="p">)</span> <span class="o">/</span> <span class="n">count</span>
+    <span class="k">if</span> <span class="n">chunk_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># list를 split할 시작 index의 리스트</span>
+    <span class="c1"># 예를 들어, 10개짜리 list를 두개로 나누는 경우라면, [0, 5]가 된다.</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">chunk_size</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">count</span><span class="p">)]</span>
+   
+    <span class="n">splitted</span> <span class="o">=</span> <span class="p">[</span><span class="n">crowd</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">izip_longest</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span>
+
+    <span class="k">return</span> <span class="n">splitted</span></div>
+
+
+<div class="viewcode-block" id="edit_distance"><a class="viewcode-back" href="../../putils.util.html#putils.util.edit_distance">[docs]</a><span class="k">def</span> <span class="nf">edit_distance</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;levenshtein&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;두 iterable sequence의 edit distance를 반환한다.</span>
+<span class="sd">    </span>
+<span class="sd">    iterable seq1, seq2 사이의 edit distance를 반환한다.</span>
+<span class="sd">    seq1, seq2가 동일 object이거나 값이 같다면 0을 반환한다.</span>
+<span class="sd">    현재 method는 levenshtein만 지원한다.</span>
+<span class="sd">    </span>
+<span class="sd">    :param Iterable seq1: edit distance를 구할 iterable</span>
+<span class="sd">    :param Iterable seq2: edit distance를 구할 iterable</span>
+<span class="sd">    :param str method: edit distance를 구할 method. 현재는 levenshtein만 지원.</span>
+<span class="sd">    :return: seq1과 seq2의 edit distance</span>
+<span class="sd">    :raises ValueError: seq1, seq2 둘 중의 하나가 iterable이 아니거나, method가 올바른 값이 아닌 경우.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seq2</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;arguments should be iterable.&quot;</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">method</span> <span class="o">!=</span> <span class="s2">&quot;levenshtein&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unknown method: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">seq1</span> <span class="ow">is</span> <span class="n">seq2</span> <span class="ow">or</span> <span class="n">seq1</span> <span class="o">==</span> <span class="n">seq2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    
+    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;levenshtein&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_levenshtein</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">)</span></div>
+
+    
+<span class="k">def</span> <span class="nf">_levenshtein</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;levenshtein method로 구한 seq1과 seq2의 edit distance&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_levenshtein</span><span class="p">(</span><span class="n">seq2</span><span class="p">,</span> <span class="n">seq1</span><span class="p">)</span>
+
+    <span class="c1"># So now we have len(seq1) &gt;= len(seq2).</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">seq1</span><span class="p">)</span>
+
+    <span class="c1"># &quot;abc&quot; 같은 string인 경우 [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]로 만들어야 하므로 tuple로 한번 감싸야 한다.</span>
+    <span class="n">seq1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">seq1</span><span class="p">))</span>
+    <span class="n">seq2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">seq2</span><span class="p">))</span>
+
+    <span class="n">previous_row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seq1</span><span class="p">:</span>
+        <span class="c1"># d[i, j] = d[i-1, j] + 1</span>
+        <span class="n">current_row</span> <span class="o">=</span> <span class="n">previous_row</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># d[i, j] = min(previous current row, d[i-1, j-1] + 1 or 0)</span>
+        <span class="c1"># seq2 != s이면 seq1[i] != seq2[j] 인 상태임.</span>
+        <span class="n">current_row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span>
+                <span class="n">current_row</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">previous_row</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">seq2</span> <span class="o">!=</span> <span class="n">s</span><span class="p">))</span>
+
+        <span class="c1"># d[i, j] = d[i, j-1] + 1</span>
+        <span class="n">current_row</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span>
+                <span class="n">current_row</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+                <span class="n">current_row</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">previous_row</span> <span class="o">=</span> <span class="n">current_row</span>
+
+    <span class="c1"># return d[i, j]</span>
+    <span class="k">return</span> <span class="n">previous_row</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, jay.han.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

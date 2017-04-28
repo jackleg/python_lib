@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>putils.strutil module &#8212; putils 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-putils.strutil">
+<span id="putils-strutil-module"></span><h1>putils.strutil module<a class="headerlink" href="#module-putils.strutil" title="Permalink to this headline">¶</a></h1>
+<p>string 관련 처리 모듈.</p>
+<dl class="function">
+<dt id="putils.strutil.convert_to_str">
+<code class="descclassname">putils.strutil.</code><code class="descname">convert_to_str</code><span class="sig-paren">(</span><em>may_unicode</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#convert_to_str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.convert_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>주어진 string을 str로 바꿔준다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>may_unicode</strong> &#8211; str로 바꿀 스트링.</li>
+<li><strong>encoding</strong> &#8211; 사용할 encoding.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">may_unicode를 encoding으로 encoding한 str.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.strutil.get_json_value">
+<code class="descclassname">putils.strutil.</code><code class="descname">get_json_value</code><span class="sig-paren">(</span><em>json_obj</em>, <em>element_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#get_json_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.get_json_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>json_obj에서 element_name의 value를 가져온다.</p>
+<p>기본적으로 json_obj[element_name] 값을 반환한다.
+이 때, element_name이 &#8220;/&#8221;로 나뉘어져 있으면, 하위 element name으로 생각한다.
+즉, &#8220;parent/child&#8221; 로 이름이 들어왔으면, json_obj[&#8220;parent&#8221;][&#8220;child&#8221;]를 반환한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>json_obj</strong> &#8211; 살펴볼 json object.</li>
+<li><strong>element_name</strong> &#8211; 값을 가져올 element name. &#8216;/&#8217;는 parent/child 구분자로 사용한다.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">json_obj에서 element_name의 value. element_name이 없다면 KeyError.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.strutil.has_hangul">
+<code class="descclassname">putils.strutil.</code><code class="descname">has_hangul</code><span class="sig-paren">(</span><em>haystack</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#has_hangul"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.has_hangul" title="Permalink to this definition">¶</a></dt>
+<dd><p>주어진 string 안에 한글이 존재하는지 여부를 판단.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hayatack</strong> &#8211; 검사할 string.</li>
+<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">haystack string안에 한글 자모, 혹은 글자가 존재하면 True, 없으면 False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.strutil.str_join">
+<code class="descclassname">putils.strutil.</code><code class="descname">str_join</code><span class="sig-paren">(</span><em>data_list</em>, <em>sep='\t'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#str_join"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.str_join" title="Permalink to this definition">¶</a></dt>
+<dd><p>data_list들을 하나의 문자열로 만든다.</p>
+<p>str.join()과 유사하게 동작한다.
+단, data_list가 str이 아닌 경우에도 사용 가능하다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data_list</strong> &#8211; join해서 하나로 만들 데이터 리스트.</li>
+<li><strong>sep</strong> &#8211; data_list의 element들을 join할 때 사용할 glue str.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">sep로 data_list를 붙인 하나의 str.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/putils.strutil.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, jay.han.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/putils.strutil.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

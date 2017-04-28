@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>putils.util module &#8212; putils 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-putils.util">
+<span id="putils-util-module"></span><h1>putils.util module<a class="headerlink" href="#module-putils.util" title="Permalink to this headline">¶</a></h1>
+<p>utility 모음</p>
+<dl class="function">
+<dt id="putils.util.edit_distance">
+<code class="descclassname">putils.util.</code><code class="descname">edit_distance</code><span class="sig-paren">(</span><em>seq1</em>, <em>seq2</em>, <em>method='levenshtein'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/util.html#edit_distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.util.edit_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>두 iterable sequence의 edit distance를 반환한다.</p>
+<p>iterable seq1, seq2 사이의 edit distance를 반환한다.
+seq1, seq2가 동일 object이거나 값이 같다면 0을 반환한다.
+현재 method는 levenshtein만 지원한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>seq1</strong> (<em>Iterable</em>) &#8211; edit distance를 구할 iterable</li>
+<li><strong>seq2</strong> (<em>Iterable</em>) &#8211; edit distance를 구할 iterable</li>
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) &#8211; edit distance를 구할 method. 현재는 levenshtein만 지원.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">seq1과 seq2의 edit distance</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>ValueError</strong> &#8211; seq1, seq2 둘 중의 하나가 iterable이 아니거나, method가 올바른 값이 아닌 경우.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.util.split_list">
+<code class="descclassname">putils.util.</code><code class="descname">split_list</code><span class="sig-paren">(</span><em>crowd</em>, <em>count=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/util.html#split_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.util.split_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>crowd를 최대한 동일한 사이즈로 count 개수만큼 나누어, 리스트의 리스트를 만든다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>crowd</strong> &#8211; 나눌 리스트</li>
+<li><strong>count</strong> &#8211; 나눌 개수.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">count 개수만큼 나뉜 리스트의 리스트.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/putils.util.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, jay.han.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/putils.util.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

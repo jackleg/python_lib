@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>putils.dfutil module &#8212; putils 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-putils.dfutil">
+<span id="putils-dfutil-module"></span><h1>putils.dfutil module<a class="headerlink" href="#module-putils.dfutil" title="Permalink to this headline">¶</a></h1>
+<p>pandas.DataFrame 관련 utility</p>
+<dl class="function">
+<dt id="putils.dfutil.display_full">
+<code class="descclassname">putils.dfutil.</code><code class="descname">display_full</code><span class="sig-paren">(</span><em>df</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/dfutil.html#display_full"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.dfutil.display_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>truncation view로 들어가지 않고, df를 모두 출력한다.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.dfutil.find_by_value">
+<code class="descclassname">putils.dfutil.</code><code class="descname">find_by_value</code><span class="sig-paren">(</span><em>df</em>, <em>column_name</em>, <em>value</em>, <em>first=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/dfutil.html#find_by_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.dfutil.find_by_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>df의 column에 있는 특정 값의 위치를 찾는다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>df</strong> &#8211; 값을 찾을 DataFrame</li>
+<li><strong>column_name</strong> &#8211; 값을 찾을 column name(df[column_name])</li>
+<li><strong>value</strong> &#8211; 찾을 값.</li>
+<li><strong>first</strong> &#8211; 동일한 값이 여러 개 있는 경우 처음 나타나는 값을 반환할 지 여부. False이면 마지막 값을 반환.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">df[column_name] == value인 index. 해당하는 값이 없다면 None.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.dfutil.has_null">
+<code class="descclassname">putils.dfutil.</code><code class="descname">has_null</code><span class="sig-paren">(</span><em>ser</em>, <em>need_count=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/dfutil.html#has_null"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.dfutil.has_null" title="Permalink to this definition">¶</a></dt>
+<dd><p>series에서 null value가 있는지 여부 확인.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>ser</strong> &#8211; 확인할 값이 있는 Series.</li>
+<li><strong>need_count</strong> &#8211; null 값이 몇 개나 있는지 값을 함께 반환할 지 여부.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">ser에 null value가 있으면 true 없다면 false. need_count가 True라면 (null value 여부, null value 개수)의 pair.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.dfutil.read_json">
+<code class="descclassname">putils.dfutil.</code><code class="descname">read_json</code><span class="sig-paren">(</span><em>filepath_or_buffer</em>, <em>index_col=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/dfutil.html#read_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.dfutil.read_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>row 데이터가 json 포맷으로 구성된 데이터 읽기</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.dfutil.read_kenobi">
+<code class="descclassname">putils.dfutil.</code><code class="descname">read_kenobi</code><span class="sig-paren">(</span><em>filepath_or_buffer</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/dfutil.html#read_kenobi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.dfutil.read_kenobi" title="Permalink to this definition">¶</a></dt>
+<dd><p>kenobi qc 파일 릵기.</p>
+<p>read_tsv 함수를 사용하며, 그 외에는 아래와 같은 기본값 사용.
+skiprows = 14
+header = 0</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.dfutil.read_tsv">
+<code class="descclassname">putils.dfutil.</code><code class="descname">read_tsv</code><span class="sig-paren">(</span><em>filepath_or_buffer</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/dfutil.html#read_tsv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.dfutil.read_tsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>seperator가 tab인 csv 읽기</p>
+<p>아래와 같은 옵션이 default로 셋팅된 read_csv의 wrapper.
+sep = tab
+header = None
+quoting = csv.QUOTE_NONE</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/putils.dfutil.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, jay.han.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/putils.dfutil.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
