@@ -2,6 +2,7 @@
 # -*- coding: utf8 -*-
 
 import strutil
+import util
 
 
 def test_expand_string_to_jamo():
@@ -22,3 +23,13 @@ def test_expand_string_to_jamo():
 
 if __name__ == "__main__":
 	test_expand_string_to_jamo()
+
+	s1 = "SK플래닛".decode("utf8")
+	s2 = "SK푼레닛".decode("utf8")
+
+	s1_expanded = strutil.expand_string_to_jamo(s1)
+	s2_expanded = strutil.expand_string_to_jamo(s2)
+
+	print s1.encode("utf8"), " / ", s2.encode("utf8")
+	print "edit distance in character: ", util.edit_distance(s1, s2)
+	print "edit distance in jamo: ", util.edit_distance(strutil.expand_string_to_jamo(s1), strutil.expand_string_to_jamo(s2))
