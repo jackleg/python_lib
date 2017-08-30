@@ -1,0 +1,7 @@
+putils.example module
+=====================
+
+.. automodule:: putils.example
+    :members:
+    :undoc-members:
+    :show-inheritance:

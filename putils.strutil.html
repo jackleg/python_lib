@@ -179,6 +179,52 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="putils.strutil.expand_string_to_jamo">
+<code class="descclassname">putils.strutil.</code><code class="descname">expand_string_to_jamo</code><span class="sig-paren">(</span><em>haystack</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#expand_string_to_jamo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.expand_string_to_jamo" title="Permalink to this definition">¶</a></dt>
+<dd><p>haystack에 한글이 포함된 경우에 자모로 분리한다.</p>
+<p>haystack에 한글이 있는 경우에는 한글을 자모로 분리하고,
+그 외의 글자들은 그대로 유지한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>haystack</strong> &#8211; 분석 대상 string</li>
+<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">haystack의 한글이 자모로 분석된 글자들의 리스트. 한글이 아닌 글자는 변형되지 않는다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.strutil.expand_syllable_to_jamo">
+<code class="descclassname">putils.strutil.</code><code class="descname">expand_syllable_to_jamo</code><span class="sig-paren">(</span><em>needle</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#expand_syllable_to_jamo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.expand_syllable_to_jamo" title="Permalink to this definition">¶</a></dt>
+<dd><p>주어진 글자를 자모로 분리한다.</p>
+<p>주어진 글자가 한글의 온전한 음절인 경우, 해당 글자를 자모로 분리한 리스트를 반환한다.
+그렇지 않은 경우 자모 분리를 하지 않고 글자 그대로 리스트에 담아서 반환한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>needle</strong> &#8211; 분석 대상 글자</li>
+<li><strong>encoding</strong> &#8211; needle이 unicode가 아닌 경우 사용된 encoding.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">needle이 자모로 분석된 글자들의 리스트. needle이 한글이 아닌 경우 글자가 그대로 들어가 있다.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="putils.strutil.get_json_value">
 <code class="descclassname">putils.strutil.</code><code class="descname">get_json_value</code><span class="sig-paren">(</span><em>json_obj</em>, <em>element_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#get_json_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.get_json_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>json_obj에서 element_name의 value를 가져온다.</p>
@@ -217,6 +263,27 @@
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">haystack string안에 한글 자모, 혹은 글자가 존재하면 True, 없으면 False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.strutil.is_hangul_syllable">
+<code class="descclassname">putils.strutil.</code><code class="descname">is_hangul_syllable</code><span class="sig-paren">(</span><em>needle</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#is_hangul_syllable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.is_hangul_syllable" title="Permalink to this definition">¶</a></dt>
+<dd><p>주어진 글자가 한글인지 아닌지 판단.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>needle</strong> &#8211; 검사할 글자</li>
+<li><strong>encoding</strong> &#8211; needle이 unicode가 아닌 경우 사용된 encoding.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">needle이 한글 자모 혹은 하나의 음절이면 True, 아니면 False.</p>
 </td>
 </tr>
 </tbody>

@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>putils.example &mdash; putils 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="putils 0.1 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> putils
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">putils</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>putils.example</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for putils.example</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">strutil</span>
+
+
+<div class="viewcode-block" id="test_expand_string_to_jamo"><a class="viewcode-back" href="../../putils.example.html#putils.example.test_expand_string_to_jamo">[docs]</a><span class="k">def</span> <span class="nf">test_expand_string_to_jamo</span><span class="p">():</span>
+	<span class="n">eng_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Make an iterator that returns elements from the first iterable until it is exhausted,</span>
+<span class="s2">				 then proceeds to the next iterable, until all of the iterables are exhausted.</span>
+<span class="s2">				 Used for treating consecutive sequences as a single sequence. Roughly equivalent to:&quot;&quot;&quot;</span>
+
+	<span class="n">han_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;다시 들어도 좋은 송민호x태양 &#39;겁&#39;♪ (ft.진한 여운)</span>
+<span class="s2">				 동영상 FAQ</span>
+<span class="s2">				 등록일2017. 08. 26 원본영상 아는 형님 90회 다시보기 홈페이지 바로가기&quot;&quot;&quot;</span>
+
+	<span class="nb">print</span> <span class="s2">&quot;original:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">eng_str</span>
+	<span class="nb">print</span> <span class="s2">&quot;expanded:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">strutil</span><span class="o">.</span><span class="n">expand_string_to_jamo</span><span class="p">(</span><span class="n">eng_str</span><span class="p">)</span>
+	<span class="nb">print</span>
+	<span class="nb">print</span> <span class="s2">&quot;original:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">han_str</span>
+	<span class="nb">print</span> <span class="s2">&quot;expanded:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">strutil</span><span class="o">.</span><span class="n">expand_string_to_jamo</span><span class="p">(</span><span class="n">han_str</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+	<span class="n">test_expand_string_to_jamo</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, jay.han.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
