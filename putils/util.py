@@ -40,9 +40,13 @@ def edit_distance(seq1, seq2, method='levenshtein'):
     :param Iterable seq1: edit distance를 구할 iterable
     :param Iterable seq2: edit distance를 구할 iterable
     :param str method: edit distance를 구할 method. 현재는 levenshtein만 지원.
-    :return: seq1과 seq2의 edit distance
+    :return: seq1과 seq2의 edit distance. seq1, 혹은 seq2가 None이면 -1.
     :raises ValueError: seq1, seq2 둘 중의 하나가 iterable이 아니거나, method가 올바른 값이 아닌 경우.
     """
+
+	if seq1 is None or seq2 is None:
+		return -1
+
     if not isinstance(seq1, collections.Iterable) or not isinstance(seq2, collections.Iterable):
         raise ValueError("arguments should be iterable.")
         
