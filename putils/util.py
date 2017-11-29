@@ -44,8 +44,8 @@ def edit_distance(seq1, seq2, method='levenshtein'):
     :raises ValueError: seq1, seq2 둘 중의 하나가 iterable이 아니거나, method가 올바른 값이 아닌 경우.
     """
 
-	if seq1 is None or seq2 is None:
-		return -1
+    if seq1 is None or seq2 is None:
+        return -1
 
     if not isinstance(seq1, collections.Iterable) or not isinstance(seq2, collections.Iterable):
         raise ValueError("arguments should be iterable.")
