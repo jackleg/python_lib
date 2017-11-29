@@ -7,10 +7,26 @@ import itertools
 
 
 # constants
-HANGUL_SYLLABLE_BASE=0xAC00 # == '가'
-HANGUL_CHOSEONG_BASE=0x1100
-HANGUL_JUNGSEONG_BASE=0x1161
-HANGUL_JONGSEONG_BASE=0x11A7
+HANGUL_SYLLABLE_BASE = 0xAC00 # == '가'
+HANGUL_CHOSEONG_BASE = 0x1100
+HANGUL_JUNGSEONG_BASE = 0x1161
+HANGUL_JONGSEONG_BASE = 0x11A7
+
+HAN_TO_ENG_DICT = {unichr(0x1100): "r", unichr(0x1101): "R", unichr(0x1102): "s", unichr(0x1103): "e", unichr(0x1104): "E",
+                   unichr(0x1105): "f", unichr(0x1106): "a", unichr(0x1107): "q", unichr(0x1108): "Q", unichr(0x1109): "t",
+                   unichr(0x110A): "T", unichr(0x110B): "d", unichr(0x110C): "w", unichr(0x110D): "W", unichr(0x110E): "c",
+                   unichr(0x110F): "z", unichr(0x1110): "x", unichr(0x1111): "v", unichr(0x1112): "g",
+                   unichr(0x1161): "k", unichr(0x1162): "o", unichr(0x1163): "i", unichr(0x1164): "O", unichr(0x1165): "j",
+                   unichr(0x1166): "p", unichr(0x1167): "u", unichr(0x1168): "P", unichr(0x1169): "h", unichr(0x116A): "hk",
+                   unichr(0x116B): "ho", unichr(0x116C): "hl", unichr(0x116D): "y", unichr(0x116E): "n", unichr(0x116F): "nj",
+                   unichr(0x1170): "np", unichr(0x1171): "nl", unichr(0x1172): "b", unichr(0x1173): "m", unichr(0x1174): "ml",
+                   unichr(0x1175): "l",
+                   unichr(0x11A8): "r", unichr(0x11A9): "R", unichr(0x11AA): "rt", unichr(0x11AB): "s", unichr(0x11AC): "sw",
+                   unichr(0x11AD): "sg", unichr(0x11AE): "e", unichr(0x11AF): "f", unichr(0x11B0): "fr", unichr(0x11B1): "fa",
+                   unichr(0x11B2): "fq", unichr(0x11B3): "ft", unichr(0x11B4): "fx", unichr(0x11B5): "fv", unichr(0x11B6): "fg",
+                   unichr(0x11B7): "a", unichr(0x11B8): "q", unichr(0x11B9): "qt", unichr(0x11BA): "t", unichr(0x11BB): "T",
+                   unichr(0x11BC): "d", unichr(0x11BD): "w", unichr(0x11BE): "c", unichr(0x11BF): "z", unichr(0x11C0): "x",
+                   unichr(0x11C1): "v", unichr(0x11C2): "g"}
 
 
 def str_join(data_list, sep="\t"):
@@ -124,6 +140,21 @@ def expand_string_to_jamo(haystack, encoding="utf8"):
     merged_list = list(itertools.chain.from_iterable(expanded_list))
 
     return merged_list
+
+
+def convert_hangul_to_eng(haystack, encoding="utf8"):
+	"""haystack에 포함된 한글을 영타로 변환
+
+	haystack에 포함되어 있는 한글을, 영어로 타이핑 했을 때의 결과로 변환한다.
+	
+	:param haystack: string.
+	:param encoding: haystack이 unicode가 아닌 경우 사용된 encoding.
+	:return: haystack에 포함된 한글을 영어 타이핑으로 변환한 unicode 스트링 
+	"""
+	jamo_list = expand_string_to_jamo(haystack, encoding)
+	eng_list = [HAN_TO_ENG_DICT.get(jamo, jamo) for jamo in jamo_list]
+
+	return "".join(eng_list)
 
 
 def convert_to_str(may_unicode, encoding="utf8"):
