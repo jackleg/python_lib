@@ -26,7 +26,19 @@ HAN_TO_ENG_DICT = {unichr(0x1100): "r", unichr(0x1101): "R", unichr(0x1102): "s"
                    unichr(0x11B2): "fq", unichr(0x11B3): "ft", unichr(0x11B4): "fx", unichr(0x11B5): "fv", unichr(0x11B6): "fg",
                    unichr(0x11B7): "a", unichr(0x11B8): "q", unichr(0x11B9): "qt", unichr(0x11BA): "t", unichr(0x11BB): "T",
                    unichr(0x11BC): "d", unichr(0x11BD): "w", unichr(0x11BE): "c", unichr(0x11BF): "z", unichr(0x11C0): "x",
-                   unichr(0x11C1): "v", unichr(0x11C2): "g"}
+                   unichr(0x11C1): "v", unichr(0x11C2): "g",
+                   unichr(0x3131): "r", unichr(0x3132): "R", unichr(0x3133): "rt", unichr(0x3134): "s", unichr(0x3135): "sw",
+                   unichr(0x3136): "sg", unichr(0x3137): "e", unichr(0x3138): "E", unichr(0x3139): "f", unichr(0x313A): "fr",
+                   unichr(0x313B): "fa", unichr(0x313C): "fq", unichr(0x313D): "ft", unichr(0x313E): "fx", unichr(0x313F): "fv",
+                   unichr(0x3140): "fg", unichr(0x3141): "a", unichr(0x3142): "q", unichr(0x3143): "Q", unichr(0x3144): "qt",
+                   unichr(0x3145): "t", unichr(0x3146): "T", unichr(0x3147): "d", unichr(0x3148): "w", unichr(0x3149): "W",
+                   unichr(0x314A): "c", unichr(0x314B): "z", unichr(0x314C): "x", unichr(0x314D): "v", unichr(0x314E): "g",
+                   unichr(0x314F): "k", unichr(0x3150): "o", unichr(0x3151): "i", unichr(0x3152): "O", unichr(0x3153): "j",
+                   unichr(0x3154): "p", unichr(0x3155): "u", unichr(0x3156): "P", unichr(0x3157): "h", unichr(0x3158): "hk",
+                   unichr(0x3159): "ho", unichr(0x315A): "hl", unichr(0x315B): "y", unichr(0x315C): "n", unichr(0x315D): "nj",
+                   unichr(0x315E): "np", unichr(0x315F): "nl", unichr(0x3160): "b", unichr(0x3161): "m", unichr(0x3162): "ml",
+                   unichr(0x3163): "l"
+                   }
 
 
 def str_join(data_list, sep="\t"):
