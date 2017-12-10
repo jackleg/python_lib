@@ -5,4 +5,4 @@
 
 __author__ = "jay.han"
 __email__ = "jackleg83@gmail.com"
-__version__ = "0.1"
+__version__ = "0.2"
