@@ -179,6 +179,53 @@
 </dd></dl>
 
 <dl class="function">
+<dt id="putils.strutil.has_hangul_jamo">
+<code class="descclassname">putils.strutil.</code><code class="descname">has_hangul_jamo</code><span class="sig-paren">(</span><em>haystack</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#has_hangul_jamo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.has_hangul_jamo" title="Permalink to this definition">¶</a></dt>
+<dd><p>주어진 string 안에 한글 자모가 있는지 판단.</p>
+<p>haystack의 문자들 중 완전하지 않은, 한글의 자모만 있는 경우가 있는지 판단한다.
+예를 들어 &#8220;ㄱㄴㄷㅏㄷㄹ&#8221; 과 같은 경우.
+unicode의 hangul compatability jamo 코드를 사용한다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hayatack</strong> &#8211; 검사할 string.</li>
+<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">haystack string안에 한글 자모가 있으면 True, 그렇지 않으면 False.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="putils.strutil.has_non_bmp">
+<code class="descclassname">putils.strutil.</code><code class="descname">has_non_bmp</code><span class="sig-paren">(</span><em>haystack</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#has_non_bmp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.has_non_bmp" title="Permalink to this definition">¶</a></dt>
+<dd><p>주어진 string 안에 unicode BMP영역이 아닌 글자가 있는지 여부를 판단.</p>
+<p>haystack의 문자들 중 Basic Multilingual Plane에 속하지 않는 글자가 있는지 판단한다.
+BMP 영역에 기본적인 글자가 모두 정의되어 있으므로, 이 영역에 속하지 않는 경우는 이모티콘과 같은 경우다.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>hayatack</strong> &#8211; 검사할 string.</li>
+<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">haystack string안에 non bmp 영역의 글자가 있으면 True, 그렇지 않으면 False.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="putils.strutil.is_hangul_syllable">
 <code class="descclassname">putils.strutil.</code><code class="descname">is_hangul_syllable</code><span class="sig-paren">(</span><em>needle</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#is_hangul_syllable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.is_hangul_syllable" title="Permalink to this definition">¶</a></dt>
 <dd><p>주어진 글자가 한글인지 아닌지 판단.</p>
