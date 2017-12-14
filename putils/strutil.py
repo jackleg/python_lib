@@ -40,6 +40,10 @@ HAN_TO_ENG_DICT = {unichr(0x1100): "r", unichr(0x1101): "R", unichr(0x1102): "s"
                    unichr(0x3163): "l"
                    }
 
+HANGUL_RE = re.compile(u'[ㄱ-ㅎㅏ-ㅣ가-힣]')
+NON_BMP_RE = re.compile(u"[^\U00000000-\U0000d7ff\U0000e000-\U0000ffff]")
+HANGUL_JAMO_RE = re.compile(u"[\u3131-\u3163]") # hangul compatability jamo code
+
 
 def str_join(data_list, sep="\t"):
     """data_list들을 하나의 문자열로 만든다.
@@ -58,6 +62,49 @@ def str_join(data_list, sep="\t"):
     return sep.join(str_list)
 
 
+def has_hangul_jamo(haystack, encoding="utf8"):
+    """주어진 string 안에 한글 자모가 있는지 판단.
+
+    haystack의 문자들 중 완전하지 않은, 한글의 자모만 있는 경우가 있는지 판단한다.
+    예를 들어 "ㄱㄴㄷㅏㄷㄹ" 과 같은 경우.
+    unicode의 hangul compatability jamo 코드를 사용한다.
+
+    :param hayatack: 검사할 string.
+    :param encoding: haystack이 unicode가 아닌 경우 사용된 encoding.
+    :return: haystack string안에 한글 자모가 있으면 True, 그렇지 않으면 False.
+    """
+
+    if isinstance(haystack, str):
+        haystack = haystack.decode(encoding)
+    elif isinstance(haystack, unicode):
+        pass
+    else: # 문자열이 아닌 값이 들어온 경우
+        raise TypeError("haystack must be str, or unicode. (%s)[%s] received." % (haystack, type(haystack)))
+
+    return (HANGUL_JAMO_RE.search(haystack) is not None)
+
+    
+def has_non_bmp(haystack, encoding="utf8"):
+    """주어진 string 안에 unicode BMP영역이 아닌 글자가 있는지 여부를 판단.
+
+    haystack의 문자들 중 Basic Multilingual Plane에 속하지 않는 글자가 있는지 판단한다.
+    BMP 영역에 기본적인 글자가 모두 정의되어 있으므로, 이 영역에 속하지 않는 경우는 이모티콘과 같은 경우다.
+
+    :param hayatack: 검사할 string.
+    :param encoding: haystack이 unicode가 아닌 경우 사용된 encoding.
+    :return: haystack string안에 non bmp 영역의 글자가 있으면 True, 그렇지 않으면 False.
+    """
+
+    if isinstance(haystack, str):
+        haystack = haystack.decode(encoding)
+    elif isinstance(haystack, unicode):
+        pass
+    else: # 문자열이 아닌 값이 들어온 경우
+        raise TypeError("haystack must be str, or unicode. (%s)[%s] received." % (haystack, type(haystack)))
+
+    return (NON_BMP_RE.search(haystack) is not None)
+    
+
 def has_hangul(haystack, encoding="utf8"):
     """주어진 string 안에 한글이 존재하는지 여부를 판단.
 
@@ -65,8 +112,6 @@ def has_hangul(haystack, encoding="utf8"):
     :param encoding: haystack이 unicode가 아닌 경우 사용된 encoding.
     :return: haystack string안에 한글 자모, 혹은 글자가 존재하면 True, 없으면 False
     """
-
-    hangul = re.compile(u'[ㄱ-ㅎㅏ-ㅣ가-힣]')
    
     if isinstance(haystack, str):
         haystack = haystack.decode(encoding)
@@ -75,7 +120,7 @@ def has_hangul(haystack, encoding="utf8"):
     else: # 문자열이 아닌 값이 들어온 경우
         raise TypeError("haystack must be str, or unicode. (%s)[%s] received." % (haystack, type(haystack)))
 
-    return (hangul.search(haystack) is not None)
+    return (HANGUL_RE.search(haystack) is not None)
 
 
 def is_hangul_syllable(needle, encoding="utf8"):
@@ -155,18 +200,18 @@ def expand_string_to_jamo(haystack, encoding="utf8"):
 
 
 def convert_hangul_to_eng(haystack, encoding="utf8"):
-	"""haystack에 포함된 한글을 영타로 변환
+    """haystack에 포함된 한글을 영타로 변환
 
-	haystack에 포함되어 있는 한글을, 영어로 타이핑 했을 때의 결과로 변환한다.
-	
-	:param haystack: string.
-	:param encoding: haystack이 unicode가 아닌 경우 사용된 encoding.
-	:return: haystack에 포함된 한글을 영어 타이핑으로 변환한 unicode 스트링 
-	"""
-	jamo_list = expand_string_to_jamo(haystack, encoding)
-	eng_list = [HAN_TO_ENG_DICT.get(jamo, jamo) for jamo in jamo_list]
+    haystack에 포함되어 있는 한글을, 영어로 타이핑 했을 때의 결과로 변환한다.
+    
+    :param haystack: string.
+    :param encoding: haystack이 unicode가 아닌 경우 사용된 encoding.
+    :return: haystack에 포함된 한글을 영어 타이핑으로 변환한 unicode 스트링 
+    """
+    jamo_list = expand_string_to_jamo(haystack, encoding)
+    eng_list = [HAN_TO_ENG_DICT.get(jamo, jamo) for jamo in jamo_list]
 
-	return "".join(eng_list)
+    return "".join(eng_list)
 
 
 def convert_to_str(may_unicode, encoding="utf8"):
