@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>putils.statsutil module &#8212; putils 0.2 documentation</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -33,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -94,7 +91,7 @@ ser1에서 확률이 0인 경우의 KL은 0이되고, ser2에서 0은 small epsi
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>il2</strong> (<em>il1</em><em>,</em>) &#8211; (keyword, score)의 리스트</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>il2</strong> (<em>il1</em><em>,</em>) – (keyword, score)의 리스트</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">il1, il2의 keyword들의 cosine similarity</td>
 </tr>
@@ -118,10 +115,10 @@ min_hat &lt; df[feature_name] &lt; max_hat 에 대해서만 구한다.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>df</strong> &#8211; feature가 포함된 DataFrame</li>
-<li><strong>feature_name</strong> &#8211; df에서 확인할 feature name.</li>
-<li><strong>min_hat</strong> &#8211; minimum threshold. min_hat 이하의 feature들은 filtering된다.</li>
-<li><strong>max_hat</strong> &#8211; maximum threshold. max_hat 이상의 feature들은 filtering된다.</li>
+<li><strong>df</strong> – feature가 포함된 DataFrame</li>
+<li><strong>feature_name</strong> – df에서 확인할 feature name.</li>
+<li><strong>min_hat</strong> – minimum threshold. min_hat 이하의 feature들은 filtering된다.</li>
+<li><strong>max_hat</strong> – maximum threshold. max_hat 이상의 feature들은 filtering된다.</li>
 </ul>
 </td>
 </tr>
@@ -144,11 +141,11 @@ min_hat &lt; df[feature_name] &lt; max_hat 에 대해서만 구한다.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>target</strong> &#8211; good / bad 여부를 나타내는 Series.</li>
-<li><strong>feature</strong> &#8211; 분포를 구할 feature Series.</li>
-<li><strong>bins</strong> &#8211; feature의 구간 개수. default: 10</li>
-<li><strong>accumulative</strong> &#8211; 확률을 구할 때 누적 확률을 구할 것인지 여부. False이면 해당 구간에서의 확률만 구하고, True이면 누적 확률을 구한다. default: False</li>
-<li><strong>ascending</strong> &#8211; accumulative == True일 때, 누적 확률을 큰 값에서부터 누적할지, 작은 값부터 누적할지 결정한다. True이면 작은 값부터, False이면 큰 값부터 누적한다.</li>
+<li><strong>target</strong> – good / bad 여부를 나타내는 Series.</li>
+<li><strong>feature</strong> – 분포를 구할 feature Series.</li>
+<li><strong>bins</strong> – feature의 구간 개수. default: 10</li>
+<li><strong>accumulative</strong> – 확률을 구할 때 누적 확률을 구할 것인지 여부. False이면 해당 구간에서의 확률만 구하고, True이면 누적 확률을 구한다. default: False</li>
+<li><strong>ascending</strong> – accumulative == True일 때, 누적 확률을 큰 값에서부터 누적할지, 작은 값부터 누적할지 결정한다. True이면 작은 값부터, False이면 큰 값부터 누적한다.</li>
 </ul>
 </td>
 </tr>
@@ -168,8 +165,8 @@ min_hat &lt; df[feature_name] &lt; max_hat 에 대해서만 구한다.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>haystack</strong> &#8211; needle이 포함된 여부를 판단하기 위한 키워드 리스트.</li>
-<li><strong>needles</strong> &#8211; 포함 여부를 판단하기 위한 키워드 리스트.</li>
+<li><strong>haystack</strong> – needle이 포함된 여부를 판단하기 위한 키워드 리스트.</li>
+<li><strong>needles</strong> – 포함 여부를 판단하기 위한 키워드 리스트.</li>
 </ul>
 </td>
 </tr>
@@ -195,12 +192,12 @@ min_hat &lt; df[feature_name] &lt; max_hat 에 대해서만 구한다.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>target</strong> &#8211; good / bad 여부를 나타내는 Series.</li>
-<li><strong>feature</strong> &#8211; 분포를 구할 feature Series.</li>
-<li><strong>bins</strong> &#8211; feature의 구간 개수. default: 10</li>
-<li><strong>accumulative</strong> &#8211; 확률을 구할 때 누적 확률을 구할 것인지 여부. False이면 해당 구간에서의 확률만 구하고, True이면 누적 확률을 구한다. default: False</li>
-<li><strong>ascending</strong> &#8211; accumulative == True일 때, 누적 확률을 큰 값에서부터 누적할지, 작은 값부터 누적할지 결정한다. True이면 작은 값부터, False이면 큰 값부터 누적한다.</li>
-<li><strong>show_table</strong> &#8211; feature 구간별 data table을 출력할 지 여부.</li>
+<li><strong>target</strong> – good / bad 여부를 나타내는 Series.</li>
+<li><strong>feature</strong> – 분포를 구할 feature Series.</li>
+<li><strong>bins</strong> – feature의 구간 개수. default: 10</li>
+<li><strong>accumulative</strong> – 확률을 구할 때 누적 확률을 구할 것인지 여부. False이면 해당 구간에서의 확률만 구하고, True이면 누적 확률을 구한다. default: False</li>
+<li><strong>ascending</strong> – accumulative == True일 때, 누적 확률을 큰 값에서부터 누적할지, 작은 값부터 누적할지 결정한다. True이면 작은 값부터, False이면 큰 값부터 누적한다.</li>
+<li><strong>show_table</strong> – feature 구간별 data table을 출력할 지 여부.</li>
 </ul>
 </td>
 </tr>
@@ -257,7 +254,7 @@ min_hat &lt; df[feature_name] &lt; max_hat 에 대해서만 구한다.</p>
       &copy;2017, jay.han.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |

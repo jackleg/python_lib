@@ -1,16 +1,13 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    
     <title>putils.strutil module &#8212; putils 0.2 documentation</title>
-    
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
@@ -33,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
   </head>
-  <body role="document">
+  <body>
   
 
     <div class="document">
@@ -45,6 +42,12 @@
 <span id="putils-strutil-module"></span><h1>putils.strutil module<a class="headerlink" href="#module-putils.strutil" title="Permalink to this headline">¶</a></h1>
 <p>string 관련 처리 모듈.</p>
 <dl class="function">
+<dt id="putils.strutil.camel_case_to_underline">
+<code class="descclassname">putils.strutil.</code><code class="descname">camel_case_to_underline</code><span class="sig-paren">(</span><em>camel</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#camel_case_to_underline"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.camel_case_to_underline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Camel Case로 입력된 string을 unerline으로 변경</p>
+</dd></dl>
+
+<dl class="function">
 <dt id="putils.strutil.convert_hangul_to_eng">
 <code class="descclassname">putils.strutil.</code><code class="descname">convert_hangul_to_eng</code><span class="sig-paren">(</span><em>haystack</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#convert_hangul_to_eng"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.convert_hangul_to_eng" title="Permalink to this definition">¶</a></dt>
 <dd><p>haystack에 포함된 한글을 영타로 변환</p>
@@ -54,8 +57,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>haystack</strong> &#8211; string.</li>
-<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+<li><strong>haystack</strong> – string.</li>
+<li><strong>encoding</strong> – haystack이 unicode가 아닌 경우 사용된 encoding.</li>
 </ul>
 </td>
 </tr>
@@ -75,8 +78,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>may_unicode</strong> &#8211; str로 바꿀 스트링.</li>
-<li><strong>encoding</strong> &#8211; 사용할 encoding.</li>
+<li><strong>may_unicode</strong> – str로 바꿀 스트링.</li>
+<li><strong>encoding</strong> – 사용할 encoding.</li>
 </ul>
 </td>
 </tr>
@@ -98,8 +101,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>haystack</strong> &#8211; 분석 대상 string</li>
-<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+<li><strong>haystack</strong> – 분석 대상 string</li>
+<li><strong>encoding</strong> – haystack이 unicode가 아닌 경우 사용된 encoding.</li>
 </ul>
 </td>
 </tr>
@@ -121,8 +124,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>needle</strong> &#8211; 분석 대상 글자</li>
-<li><strong>encoding</strong> &#8211; needle이 unicode가 아닌 경우 사용된 encoding.</li>
+<li><strong>needle</strong> – 분석 대상 글자</li>
+<li><strong>encoding</strong> – needle이 unicode가 아닌 경우 사용된 encoding.</li>
 </ul>
 </td>
 </tr>
@@ -138,15 +141,15 @@
 <code class="descclassname">putils.strutil.</code><code class="descname">get_json_value</code><span class="sig-paren">(</span><em>json_obj</em>, <em>element_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#get_json_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.get_json_value" title="Permalink to this definition">¶</a></dt>
 <dd><p>json_obj에서 element_name의 value를 가져온다.</p>
 <p>기본적으로 json_obj[element_name] 값을 반환한다.
-이 때, element_name이 &#8220;/&#8221;로 나뉘어져 있으면, 하위 element name으로 생각한다.
-즉, &#8220;parent/child&#8221; 로 이름이 들어왔으면, json_obj[&#8220;parent&#8221;][&#8220;child&#8221;]를 반환한다.</p>
+이 때, element_name이 “/”로 나뉘어져 있으면, 하위 element name으로 생각한다.
+즉, “parent/child” 로 이름이 들어왔으면, json_obj[“parent”][“child”]를 반환한다.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>json_obj</strong> &#8211; 살펴볼 json object.</li>
-<li><strong>element_name</strong> &#8211; 값을 가져올 element name. &#8216;/&#8217;는 parent/child 구분자로 사용한다.</li>
+<li><strong>json_obj</strong> – 살펴볼 json object.</li>
+<li><strong>element_name</strong> – 값을 가져올 element name. ‘/’는 parent/child 구분자로 사용한다.</li>
 </ul>
 </td>
 </tr>
@@ -166,8 +169,8 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hayatack</strong> &#8211; 검사할 string.</li>
-<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+<li><strong>hayatack</strong> – 검사할 string.</li>
+<li><strong>encoding</strong> – haystack이 unicode가 아닌 경우 사용된 encoding.</li>
 </ul>
 </td>
 </tr>
@@ -183,15 +186,15 @@
 <code class="descclassname">putils.strutil.</code><code class="descname">has_hangul_jamo</code><span class="sig-paren">(</span><em>haystack</em>, <em>encoding='utf8'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/putils/strutil.html#has_hangul_jamo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#putils.strutil.has_hangul_jamo" title="Permalink to this definition">¶</a></dt>
 <dd><p>주어진 string 안에 한글 자모가 있는지 판단.</p>
 <p>haystack의 문자들 중 완전하지 않은, 한글의 자모만 있는 경우가 있는지 판단한다.
-예를 들어 &#8220;ㄱㄴㄷㅏㄷㄹ&#8221; 과 같은 경우.
+예를 들어 “ㄱㄴㄷㅏㄷㄹ” 과 같은 경우.
 unicode의 hangul compatability jamo 코드를 사용한다.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hayatack</strong> &#8211; 검사할 string.</li>
-<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+<li><strong>hayatack</strong> – 검사할 string.</li>
+<li><strong>encoding</strong> – haystack이 unicode가 아닌 경우 사용된 encoding.</li>
 </ul>
 </td>
 </tr>
@@ -213,8 +216,8 @@ BMP 영역에 기본적인 글자가 모두 정의되어 있으므로, 이 영�
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hayatack</strong> &#8211; 검사할 string.</li>
-<li><strong>encoding</strong> &#8211; haystack이 unicode가 아닌 경우 사용된 encoding.</li>
+<li><strong>hayatack</strong> – 검사할 string.</li>
+<li><strong>encoding</strong> – haystack이 unicode가 아닌 경우 사용된 encoding.</li>
 </ul>
 </td>
 </tr>
@@ -234,8 +237,8 @@ BMP 영역에 기본적인 글자가 모두 정의되어 있으므로, 이 영�
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>needle</strong> &#8211; 검사할 글자</li>
-<li><strong>encoding</strong> &#8211; needle이 unicode가 아닌 경우 사용된 encoding.</li>
+<li><strong>needle</strong> – 검사할 글자</li>
+<li><strong>encoding</strong> – needle이 unicode가 아닌 경우 사용된 encoding.</li>
 </ul>
 </td>
 </tr>
@@ -257,8 +260,8 @@ BMP 영역에 기본적인 글자가 모두 정의되어 있으므로, 이 영�
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>data_list</strong> &#8211; join해서 하나로 만들 데이터 리스트.</li>
-<li><strong>sep</strong> &#8211; data_list의 element들을 join할 때 사용할 glue str.</li>
+<li><strong>data_list</strong> – join해서 하나로 만들 데이터 리스트.</li>
+<li><strong>sep</strong> – data_list의 element들을 join할 때 사용할 glue str.</li>
 </ul>
 </td>
 </tr>
@@ -308,7 +311,7 @@ BMP 영역에 기본적인 글자가 모두 정의되어 있으므로, 이 영�
       &copy;2017, jay.han.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
       
       |
