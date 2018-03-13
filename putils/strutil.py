@@ -267,5 +267,5 @@ def get_json_value(json_obj, element_name):
 def camel_case_to_underline(camel):
     """Camel Case로 입력된 string을 unerline으로 변경"""
 
-    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+    s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', camel)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
